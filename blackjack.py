@@ -30,14 +30,24 @@ def Blackjack():
         player.append(card1)
         player.append(card2)
         dealer.append(dealer1)
-        playerscore = 0
-        num = player[0].index(' ')
-        num1 = player[1].index(' ')
-        playerscore +=  int(player[0][num::]) + int(player[1][num1::])
-        print(f'Player {player} {playerscore}')
         print(f'Dealer {dealer}')
         dealer.append(dealer2)
-        
+        playerscore = 0
+        dealerscore = 0
+        num = player[0].index(' ')
+        num1 = player[1].index(' ')
+        num2 = dealer[0].index(' ')
+        num3 = dealer[1].index(' ')
+        playerscore +=  int(player[0][num::]) + int(player[1][num1::])
+        dealerscore +=  int(dealer[0][num2::]) + int(dealer[1][num3::])
+        print(f'Player {player} {playerscore}')
+        if playerscore == 21 and dealerscore == 21:
+            print("Blackjack! But it's a tie :(")
+            return
+        elif playerscore == 21:
+            print("Blackjack! You win")
+        elif dealerscore == 21:
+            print("Dealer Blackjack! You Lose >:(")
     def Hit():
         card1 = deck.pop()
         player.append(card1)
@@ -49,10 +59,9 @@ def Blackjack():
         return playerscore
     
     def Stay():
-        for i in range(random.randrange(1, 3)):
-            dealer1 = deck.pop()
-            dealer.append(dealer1)
-            dealerscore = 0
+        card1 = deck.pop()
+        dealer.append(card1)
+        dealerscore = 0
         for m in range(len(dealer)):
             num = dealer[m].index(' ')
             dealerscore +=  int(dealer[m][num::])
